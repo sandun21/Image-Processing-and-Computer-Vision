@@ -10,9 +10,8 @@ sobelh = np.array([[1, 0, -1], [2, 0, -2], [1, 0, -1]])
 
 start1 = time.time()
 #Using existing filter2D function to apply Sobel filter
-filtered_func = cv2.filter2D(image, -1, sobelh)      
+filtered_func = cv2.filter2D(image, 5, sobelh)      
   
-
 
 #Using own code to sobel filter the image
 def convImag(image, filter):
@@ -60,9 +59,9 @@ end3 = time.time()
 
 
 #Displaying images
-cv2.imshow("Sobel Filtered Image", filtered_func)  
-cv2.imshow("Sobel Filtered Image Own", filtered_own*2)
-cv2.imshow("Sobel Filtered Image Own with using seperability property", filtered_own1*9)
+cv2.imshow("Sobel Filtered Image", normalize(filtered_func))  
+cv2.imshow("Sobel Filtered Image Own", filtered_own)
+cv2.imshow("Sobel Filtered Image Own with using seperability property", filtered_own1)
 cv2.waitKey(0)
 
 #Printing time taken

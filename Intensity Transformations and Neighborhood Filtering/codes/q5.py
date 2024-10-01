@@ -44,4 +44,6 @@ plt.ylabel('Frequency')
 plt.show()
 
 cv2.imshow("Equilized Image", newim)
+cv2.imwrite("outputs/q5orig.jpg", image)
+cv2.imwrite("outputs/q5corrected.jpg", newim)
 cv2.waitKey(0)  

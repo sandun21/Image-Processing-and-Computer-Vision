@@ -20,5 +20,48 @@ plt.title('Value')
 plt.show()
 
 
-#saturation plane is better to extract foreground mask
-# obtain foreground using cv2.bitwise_and
+#Use saturation plane to extract foreground mask by thresholding
+_, mask = cv2.threshold(s, 12, 255, cv2.THRESH_BINARY)
+plt.imshow(mask, cmap='gray')
+plt.title('Foreground mask')
+plt.show()
+
+#Obtain foreground using cv2.bitwise
+foreground = cv2.bitwise_and(v, mask)
+plt.imshow(foreground, cmap='gray')
+plt.title('Foreground')
+plt.show()
+
+def historgram(image):
+    '''
+       function that takes image as the input and returns the frequency of occurance of each pixel value
+    '''
+    unique, counts = np.unique(image, return_counts=True)
+    frequency = dict(zip(unique, counts))
+    hist = np.array([frequency[i] if i in frequency.keys() else 0 for i in range(256)])
+    return hist
+
+def histEqualization(image):
+    '''
+       function that takes image to be equalized as the input and returns the equalized image 
+    '''
+    numpx = np.prod(image.shape)    
+    multfactor = 255/numpx
+    cdf = np.cumsum(historgram(image))
+    
+    t = np.floor(cdf * multfactor).astype(np.uint8)                
+    newimg = t[image]
+    return newimg
+
+
+newim = histEqualization(foreground)
+plt.imshow(newim, cmap='gray')
+plt.title('Foreground')
+plt.show()
+
+
+_, mask = cv2.threshold(s, 0, 12, cv2.THRESH_BINARY)
+mask = cv2.bitwise_and(v, mask)
+plt.imshow(mask, cmap='gray')
+plt.title('Foreground mask')
+plt.show()
