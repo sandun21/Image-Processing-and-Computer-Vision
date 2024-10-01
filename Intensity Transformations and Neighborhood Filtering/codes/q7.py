@@ -68,4 +68,13 @@ cv2.waitKey(0)
 print("Time taken by filter2D function: ", end1-start1)
 print("Time taken by own code: ", end2-end1)
 print("Time taken by seperable property: ", end3-end2)
-                                
+
+#plot original and filter2D image
+plt.figure(figsize=(10, 5))
+plt.subplot(121)
+plt.imshow(image, cmap='gray')
+plt.title('Original Image')
+plt.subplot(122)
+plt.imshow(filtered_func, cmap='gray')
+plt.title('Filtered Image')
+plt.show()
